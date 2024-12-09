@@ -11,9 +11,19 @@ using UnityEngine;
 
 namespace TD_Enhancement_Pack
 {
-	[HarmonyPatch(typeof(MouseoverReadout), "MouseoverReadoutOnGUI")]
+	[HarmonyPatch]
 	public static class MouseoverOnTopRight
 	{
+
+		[HarmonyTargetMethods]
+		public static IEnumerable<MethodBase> TargetMethods()
+		{
+			yield return AccessTools.Method(typeof(MouseoverReadout), "MouseoverReadoutOnGUI");
+			MethodInfo sandstorms = AccessTools.Method("Sandstorms.Patch_MouseoverReadout:DisplaySand");
+			if( sandstorms != null )
+				yield return sandstorms;
+		}
+
 		//public void MouseoverReadoutOnGUI()
 		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
