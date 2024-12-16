@@ -22,6 +22,9 @@ namespace TD_Enhancement_Pack
 			MethodInfo sandstorms = AccessTools.Method("Sandstorms.Patch_MouseoverReadout:DisplaySand");
 			if( sandstorms != null )
 				yield return sandstorms;
+			MethodInfo vee = AccessTools.Method("VEE.HarmonyInit:AddDroughtLine"); // VE Events
+			if( vee != null )
+				yield return vee;
 		}
 
 		//public void MouseoverReadoutOnGUI()
